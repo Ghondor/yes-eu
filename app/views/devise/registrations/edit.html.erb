@@ -1,0 +1,68 @@
+<div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+  <div class="relative py-3 lg:max-w-3xl sm:max-w-xl sm:mx-auto">
+    <div class="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
+      <div class="max-w-md mx-auto">
+        <div class="flex items-center space-x-5">
+          <div class="h-14 w-14 bg-indigo-500 rounded-full flex flex-shrink-0 justify-center items-center text-white text-2xl font-mono">
+            <span><%= "#{resource.first_name[0]}#{resource.last_name[0]}" %></span>
+          </div>
+          <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
+            <h2 class="leading-relaxed">Edit Your Profile</h2>
+            <p class="text-sm text-gray-500 font-normal leading-relaxed"><%= "#{resource.first_name} #{resource.last_name}" %></p>
+          </div>
+        </div>
+        <div class="divide-y divide-gray-200">
+          <%= form_for(resource, as: resource_name, url: user_registration_path(resource_name), html: {method: :put, class: ""}) do |f| %>
+          <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+            <div class="flex items-center space-x-4">
+              <div class="flex flex-col">
+                <%= f.label :first_name, class: "leading-loose text-sm font-bold" %>
+                <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", class: "px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" %>
+              </div>
+              <div class="flex flex-col">
+                <%= f.label :last_name, class: "leading-loose text-sm font-bold" %>
+                <%= f.text_field :last_name, autocomplete: "last_name", class: "px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" %>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4">
+              <div class="flex flex-col">
+                <%= f.label :phone_number, class: "leading-loose text-sm font-bold" %>
+                <%= f.text_field :phone_number, autocomplete: "phone_number", class: "px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600", placeholder: "000 00 000" %>
+              </div>
+              <div class="flex flex-col">
+                <%= f.label :email, class: "leading-loose text-sm font-bold" %>
+                <%= f.email_field :email, autocomplete: "email", class: "px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600", placeholder: "user@email.com" %>
+              </div>
+            </div>
+            <div class="flex items-start space-x-4">
+              <div class="flex flex-col">
+                <%= f.label :password, class: "leading-loose text-sm font-bold" %>
+                <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" %>
+                <i class="text-xs w-44">(leave blank if you don't want to change it)</i>
+                <% if @minimum_password_length %>
+                  <em class="text-xs"><%= @minimum_password_length %> characters minimum</em>
+                <% end %>
+              </div>
+              <div class="flex flex-col">
+                <%= f.label :password_confirmation, class: "leading-loose text-sm font-bold" %>
+                <%= f.text_field :password_confirmation, autocomplete: "new-password", class: "px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" %>
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <%= f.label :current_password, class: "leading-loose text-sm font-bold" %>
+              <%= f.text_field :current_password, autocomplete: "current-password", class: "px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" %>
+              <div class="text-xs">(we need your current password to confirm your changes)</div>
+            </div>
+          </div>
+          <div class="pt-4 flex items-center justify-center">
+            <%= link_to authenticated_root_path, class: "flex justify-center items-center w-full text-gray-900 px-4 py-3 rounded-md focus:outline-none" do %>
+              <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg> Cancel
+          <% end %>
+            <%= f.submit "Update Profile", class: "w-full bg-indigo-500 hover:bg-indigo-400 flex justify-center items-center px-4 py-3 rounded-full text-sm font-mitr text-white" %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
