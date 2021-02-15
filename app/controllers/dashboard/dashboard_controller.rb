@@ -1,6 +1,6 @@
 module Dashboard
   class DashboardController < ApplicationController
-    before_action :authenticate_user!, :authenticate_student!
+    before_action :authenticate_user!
     layout 'dashboard'
   end
 end
