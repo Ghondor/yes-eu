@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_14_210022) do
+ActiveRecord::Schema.define(version: 2021_02_23_200221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,45 @@ ActiveRecord::Schema.define(version: 2021_02_14_210022) do
     t.string "code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "exams", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "teacher_id"
+    t.bigint "result_id", null: false
+    t.index ["result_id"], name: "index_exams_on_result_id"
+    t.index ["teacher_id"], name: "index_exams_on_teacher_id"
+  end
+
+  create_table "levels", force: :cascade do |t|
+    t.bigint "exam_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "teacher_id"
+    t.string "title"
+    t.index ["exam_id"], name: "index_levels_on_exam_id"
+    t.index ["teacher_id"], name: "index_levels_on_teacher_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.bigint "level_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "question_title"
+    t.string "first_answer"
+    t.string "second_answer"
+    t.string "third_answer"
+    t.integer "correct_answer"
+    t.index ["level_id"], name: "index_questions_on_level_id"
+  end
+
+  create_table "results", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "student_id"
+    t.integer "grade"
+    t.index ["student_id"], name: "index_results_on_student_id"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -87,6 +126,12 @@ ActiveRecord::Schema.define(version: 2021_02_14_210022) do
     t.index ["room_id"], name: "index_users_on_room_id"
   end
 
+  add_foreign_key "exams", "results"
+  add_foreign_key "exams", "users", column: "teacher_id"
+  add_foreign_key "levels", "exams"
+  add_foreign_key "levels", "users", column: "teacher_id"
+  add_foreign_key "questions", "levels"
+  add_foreign_key "results", "users", column: "student_id"
   add_foreign_key "rooms", "users", column: "head_teacher_id"
   add_foreign_key "schools", "countries"
   add_foreign_key "users", "rooms"

@@ -1,18 +1,36 @@
 ActiveAdmin.register User do
+  permit_params :first_name, :last_name, :phone_number, :password, :password_confirmation,
+                :email, :superadmin_role, :teacher_role, :student_role
 
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-  permit_params :email, :superadmin_role, :teacher_role, :student_role
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :superadmin_role, :teacher_role, :student_role]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+  index do
+    selectable_column
+    column :first_name
+    column :last_name
+    column :email
+    column :phone_number
+    column :room
+    column :superadmin_role
+    column :teacher_role
+    column :student_role
+    column :created_at
+    column :updated_at
+    actions
+  end
 
+  form do |f|
+    f.inputs 'User Details' do
+      f.input :first_name
+      f.input :last_name
+      f.input :email
+      f.input :phone_number
+      f.input :password, as: :hidden, input_html: { value: 'ChangeMe#2' }
+      f.input :password_confirmation, as: :hidden, input_html: { value: 'ChangeMe#2' }
+    end
+    f.inputs 'User Type' do
+      f.input :superadmin_role, as: :boolean
+      f.input :teacher_role, as: :boolean
+      f.input :student_role, as: :boolean
+    end
+    f.actions
+  end
 end
