@@ -1,19 +1,16 @@
 Rails.application.routes.draw do
-  # devise_for :students
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  devise_for :users, skip: [:registrations]
-  as :user do
-    get 'users/edit' => 'devise/registrations#edit', as: 'edit_user_registration'
-    put 'users' => 'devise/registrations#update', as: 'user_registration'
-  end
-  # devise_for :users, controllers: {
-  #     sessions: 'users/sessions'
-  # }
+  devise_for :users, controllers: {
+      registrations: 'users/registrations',
+      sessions: 'users/sessions'
+  }
 
   namespace :dashboard do
     get 'pages/home'
-
+    resources :rooms, only: [:index]
+    resources :levels
+    resources :questions
     root to: "pages#home"
   end
 

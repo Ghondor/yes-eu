@@ -8,8 +8,9 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
+require('./nested-forms/addFields')
+require('./nested-forms/removeFields')
 import '../css/application.scss'
 
 global.toastr = require("toastr");
-
 

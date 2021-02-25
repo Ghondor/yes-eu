@@ -1,0 +1,28 @@
+<div class="px-12">
+  <h1 class="text-2xl text-black mb-3">Create new level</h1>
+  <%= form_with(url: dashboard_levels_path, model: level, local: true, class: "w-full overflow-scroll") do |f| %>
+    <div class="">
+      <div class="nested-fields">
+        <% if level.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(level.errors.count, "error") %> prohibited this room from being saved:</h2>
+
+            <ul>
+              <% level.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <%= f.fields_for :questions, level.questions.build do |questions_form| %>
+          <%= render 'question_fields', f: questions_form %>
+        <% end %>
+        <%= link_to_add_fields "Add Question", f, :questions %>
+      </div>
+    </div>
+    <div class="actions mt-5 flex justify-end">
+      <%= f.submit "Create level", class: "bg-indigo-500 text-white py-2 px-3 rounded-md cursor-pointer" %>
+    </div>
+  <% end %>
+</div>
+

@@ -1,0 +1,38 @@
+<div class="p-4 bg-white shadow-sm rounded-md mb-4 questions_fields_container">
+  <h3 class="text-lg text-black mb-3">Question <%= %></h3>
+  <div class="flex flex-wrap -mx-3 mb-6">
+    <%= f.hidden_field :_destroy %>
+    <div class="w-full px-3">
+      <%= f.label :question_title, class: "block tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= f.text_area :question_title, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-42" %>
+      <p class="text-gray-600 text-xs italic">This question will be shown to student when taking the exam.</p>
+    </div>
+  </div>
+  <div class="flex flex-wrap -mx-3 mb-6">
+    <div class="w-full px-3">
+      <%= f.label :first_answer, class: "block tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= f.text_field :first_answer, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+    </div>
+  </div>
+  <div class="flex flex-wrap -mx-3 mb-6">
+    <div class="w-full px-3">
+      <%= f.label :second_answer, class: "block tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= f.text_field :second_answer, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+    </div>
+  </div>
+  <div class="flex flex-wrap -mx-3 mb-6">
+    <div class="w-full px-3">
+      <%= f.label :third_answer, class: "block tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= f.text_field :third_answer, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+    </div>
+  </div>
+  <div class="flex flex-wrap -mx-3 mb-6">
+    <div class="w-full px-3">
+      <%= f.label :correct_answer, class: "block tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= f.select :correct_answer, options_for_select([["First answer", 1], ["Second answer", 2], ["Third answer", 3]]), class: "block w-full bg-indigo-500 text-gray-700 border border-indigo-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+    </div>
+  </div>
+  <div>
+    <%= link_to "Remove", '#', class: "remove_fields" %>
+  </div>
+</div>

@@ -9,7 +9,9 @@ class Ability
       can :manage, :all
     end
     if user.teacher_role?
-      can :manage, User
+      can :manage, Exam
+      can :manage, Level
+      can :manage, Question
     end
     if user.student_role?
       can :manage, User
