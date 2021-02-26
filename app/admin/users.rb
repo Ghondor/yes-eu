@@ -1,6 +1,6 @@
 ActiveAdmin.register User do
   permit_params :first_name, :last_name, :phone_number, :password, :password_confirmation,
-                :email, :superadmin_role, :teacher_role, :student_role
+                :email, :superadmin_role, :teacher_role, :student_role, :school_id, :room_id
 
   index do
     selectable_column
@@ -23,6 +23,8 @@ ActiveAdmin.register User do
       f.input :last_name
       f.input :email
       f.input :phone_number
+      f.input :school, collection: School.all.map{|u| [u.name, u.id]}
+      f.input :room, collection: Room.all.map{|u| [u.name, u.id]}
       f.input :password, as: :hidden, input_html: { value: 'ChangeMe#2' }
       f.input :password_confirmation, as: :hidden, input_html: { value: 'ChangeMe#2' }
     end

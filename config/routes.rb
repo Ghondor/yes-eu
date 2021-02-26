@@ -8,7 +8,8 @@ Rails.application.routes.draw do
 
   namespace :dashboard do
     get 'pages/home'
-    resources :rooms, only: [:index]
+    resources :rooms, only: %i[index]
+    resources :exams, only: %i[index show]
     resources :levels
     resources :questions
     root to: "pages#home"

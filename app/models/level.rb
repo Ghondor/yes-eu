@@ -1,5 +1,5 @@
 class Level < ApplicationRecord
-  before_validation :assign_level_title
+  before_save :assign_level_title
   belongs_to :exam
   belongs_to :teacher, class_name: 'User'
   has_many :questions

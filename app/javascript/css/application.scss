@@ -3,3 +3,7 @@
 @import "tailwindcss/utilities";
 
 @import 'toastr';
+
+body {
+  @apply text-black;
+}

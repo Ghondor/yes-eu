@@ -44,7 +44,7 @@ module Dashboard
 
     def update
       if @level.update(level_params)
-        redirect_to @level, notice: 'Level was successfully updated.'
+        redirect_to dashboard_level_path(@level), notice: 'Level was successfully updated.'
       else
         render :edit, status: :unprocessable_entity
       end

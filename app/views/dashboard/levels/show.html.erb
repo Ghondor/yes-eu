@@ -1,1 +1,26 @@
-<%= @level.title %>
+<div class="px-12">
+  <div class="flex justify-between items-center mb-5">
+    <h1 class="text-black text-2xl"><%= @level.title %></h1>
+    <div class="flex items-center">
+      <%= link_to "Edit", edit_dashboard_level_path(@level),
+                  class: "flex items-center justify-center px-5 py-1 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 mr-2" %>
+      <%= link_to "Delete", dashboard_level_path(@level),
+                  method: :delete, data: {confirm: "Are you sure you want to delete #{@level.title}?"},
+                  class: "flex items-center justify-center px-5 py-1 border border-transparent text-sm font-medium rounded-md text-white bg-red-600" %>
+    </div>
+  </div>
+  <% @level.questions.each_with_index do |question, index| %>
+    <div class="p-4 bg-white shadow-sm rounded-md mb-4">
+      <div class="flex justify-between items-center mb-3">
+        <h3 class="text-lg text-black"><%= question.question_title %></h3>
+        <h4 class="text-base text-black">Question <%= index + 1 %></h4>
+      </div>
+      <ol class="list-decimal pl-10 mb-4">
+        <li><%= question.first_answer %></li>
+        <li><%= question.second_answer %></li>
+        <li><%= question.third_answer %></li>
+      </ol>
+      <div class="text-green-600">Correct answer: <%= question.correct_answer %></div>
+    </div>
+  <% end %>
+</div>

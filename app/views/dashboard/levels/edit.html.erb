@@ -1,0 +1,30 @@
+<div class="px-12">
+  <h1 class="text-2xl text-black mb-3">Edit <%= @level.title %></h1>
+    <%= form_with model: @level, url: dashboard_level_path, method: :patch, local: true, class: "w-full overflow-scroll" do |f| %>
+    <div class="">
+      <div class="nested-fields">
+        <% if @level.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@level.errors.count, "error") %> prohibited this room from being saved:</h2>
+
+            <ul>
+              <% @level.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <%= f.fields_for :questions do |questions_form| %>
+          <%= render 'question_fields', f: questions_form %>
+        <% end %>
+        <div class="flex items-center justify-end">
+          <%= link_to_add_fields "Add Question", f, :questions, class: "px-5 py-1 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600" %>
+        </div>
+      </div>
+    </div>
+    <div class="actions mt-5 flex justify-end">
+      <%= f.submit "Update #{@level.title}", class: "bg-indigo-500 text-white py-2 px-3 rounded-md cursor-pointer" %>
+    </div>
+  <% end %>
+</div>
+
