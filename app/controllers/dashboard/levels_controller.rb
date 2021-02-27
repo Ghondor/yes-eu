@@ -1,6 +1,6 @@
 module Dashboard
   class LevelsController < Dashboard::DashboardController
-    # load_and_authorize_resource
+    load_and_authorize_resource
     before_action :set_level, only: %i[show edit update destroy]
 
     def index
@@ -25,15 +25,11 @@ module Dashboard
         @exam.teacher_id = current_user.id
         @exam.save
 
-        if @level.can_create_level?(school_id, @exam.id)
-          @level.exam = @exam
-          @level.teacher_id = current_user.id if current_user.teacher_role? || current_user.superadmin_role?
+        @level.exam = @exam
+        @level.teacher_id = current_user.id if current_user.teacher_role? || current_user.superadmin_role?
 
-          if @level.save
-            redirect_to dashboard_level_url(@level), notice: 'Level was successfully created.'
-          else
-            render :new, status: :unprocessable_entity
-          end
+        if @level.save
+          redirect_to dashboard_level_url(@level), notice: 'Level was successfully created.'
         else
           render :new, status: :unprocessable_entity
         end

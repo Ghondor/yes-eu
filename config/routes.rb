@@ -9,9 +9,10 @@ Rails.application.routes.draw do
   namespace :dashboard do
     get 'pages/home'
     resources :rooms, only: %i[index]
-    resources :exams, only: %i[index show]
+    resources :exams, only: %i[index]
     resources :levels
     resources :questions
+    resources :results, only: %i[new create]
     root to: "pages#home"
   end
 

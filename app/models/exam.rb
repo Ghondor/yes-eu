@@ -2,7 +2,7 @@ class Exam < ApplicationRecord
   before_validation :assign_title
   belongs_to :teacher, class_name: 'User'
   belongs_to :school
-  has_many :levels
+  has_one :level
   has_many :results
 
   validates_presence_of :title
