@@ -1,10 +1,16 @@
 <div class="px-12">
   <h1 class="text-2xl text-black mb-5">Exams</h1>
   <% if @exams.empty? %>
-    <div class="flex justify-center items-center" style="height: calc(100vh - (1rem + 32px))">
-      <h1 class="text-xl text-black text-center">You haven't created exams
-        yet! <%= link_to "Create one", new_dashboard_level_path, class: "text-indigo-400 underline" %></h1>
-    </div>
+    <% if current_user.teacher_role %>
+      <div class="flex justify-center items-center" style="height: calc(100vh - (1rem + 32px))">
+        <h1 class="text-xl text-black text-center">You haven't created exams
+          yet! <%= link_to "Create one", new_dashboard_level_path, class: "text-indigo-400 underline" %></h1>
+      </div>
+    <% elsif current_user.student_role %>
+      <div class="flex justify-center items-center" style="height: calc(100vh - (1rem + 32px))">
+        <h1 class="text-xl text-black text-center">You teacher haven't added exams yet!</h1>
+      </div>
+    <% end %>
   <% else %>
     <% @exams.each do |exam| %>
       <div class="p-4 bg-white shadow-sm rounded-md mb-4 flex justify-between text-black">
