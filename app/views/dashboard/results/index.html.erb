@@ -1,0 +1,37 @@
+<div class="mb-6 flex justify-between items-center">
+  <h1 class="text-2xl text-black">Results</h1>
+</div>
+<div>
+  <% if @results.empty? %>
+    <div class="flex justify-center items-center" style="height: calc(100vh - (1rem + 150px))">
+      <h1 class="text-xl text-black text-center">You haven't taken exams yet!</h1>
+    </div>
+  <% else %>
+    <div class="flex flex-col max-w-full overflow-x-hidden rounded-md shadow-md">
+      <table class="overflow-x-auto w-full bg-white">
+        <thead class="bg-blue-100 border-b border-gray-300">
+        <tr>
+          <th class="p-4 text-left text-sm font-medium text-gray-500">Exam</th>
+          <th class="p-4 text-left text-sm font-medium text-gray-500">Head Teacher</th>
+          <th class="p-4 text-left text-sm font-medium text-gray-500">Taken Date</th>
+          <th class="p-4 text-left text-sm font-medium text-gray-500">Taken Time</th>
+          <th class="p-4 text-left text-sm font-medium text-gray-500">Grade</th>
+        </tr>
+        </thead>
+        <tbody class="text-gray-600 text-sm divide-y divide-gray-300">
+        <% @results.each do |r| %>
+          <tr class="bg-white font-medium text-sm divide-y divide-gray-200">
+            <td class="p-4 whitespace-nowrap text-indigo-500 underline"><%= r.exam.title %></td>
+            <td class="p-4 whitespace-nowrap">
+              <%= "#{User.find(r.exam.teacher_id).map(&:first_name)[0]} #{User.find(r.exam.teacher_id).map(&:last_name)[0]}" %>
+            </td>
+            <td class="p-4 whitespace-nowrap"><%= r.created_at.strftime('%d.%m.%Y') %></td>
+            <td class="p-4 whitespace-nowrap"><%= r.created_at.strftime('%H:%M') %></td>
+            <td class="p-4 whitespace-nowrap"><%= r.grade %> <%= 'point'.pluralize(r.grade) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>

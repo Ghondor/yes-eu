@@ -14,7 +14,7 @@ class Ability
       can :manage, Question
     end
     if user.student_role?
-      can :manage, User
+      can :read, Result
     end
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
   end

@@ -1,5 +1,9 @@
 module Dashboard
   class ResultsController < Dashboard::DashboardController
+    def index
+      @results = Result.where(student_id: current_user.id)
+    end
+
     def new
       @result = Result.new
       @exam = Exam.find_by(id: params[:exam], school_id: current_user.school_id)

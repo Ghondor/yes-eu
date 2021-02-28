@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :exams, only: %i[index]
     resources :levels
     resources :questions
-    resources :results, only: %i[new create]
+    resources :results, only: %i[index new create]
     root to: "pages#home"
   end
 
