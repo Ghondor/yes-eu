@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     get 'pages/home'
     resources :rooms, only: %i[index]
     resources :exams, only: %i[index]
-    resources :levels
+    resources :levels, except: %i[index]
     resources :questions
     resources :results, only: %i[index new create]
     root to: "pages#home"

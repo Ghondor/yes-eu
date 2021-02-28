@@ -5,5 +5,6 @@ class AddFieldsToQuestions < ActiveRecord::Migration[6.0]
     add_column :questions, :second_answer, :string
     add_column :questions, :third_answer, :string
     add_column :questions, :correct_answer, :integer
+    add_column :questions, :points, :integer
   end
 end

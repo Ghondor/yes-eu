@@ -26,7 +26,7 @@ if Rails.env.development?
       teacher_role: true
   )
 
-  Room.create!(name: 'C1', head_teacher_id: User.find(2).id, school_id: 1,)
+  Room.create!(name: 'C1', head_teacher_id: User.find(2).id)
 
   User.create!(
       first_name: 'Student',

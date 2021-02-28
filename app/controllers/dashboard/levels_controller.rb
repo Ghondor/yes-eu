@@ -29,7 +29,7 @@ module Dashboard
         @level.teacher_id = current_user.id if current_user.teacher_role? || current_user.superadmin_role?
 
         if @level.save
-          redirect_to dashboard_level_url(@level), notice: 'Level was successfully created.'
+          redirect_to dashboard_level_url(@level), notice: 'Exam was successfully created.'
         else
           render :new, status: :unprocessable_entity
         end
@@ -40,16 +40,21 @@ module Dashboard
 
     def update
       if @level.update(level_params)
-        redirect_to dashboard_level_path(@level), notice: 'Level was successfully updated.'
+        redirect_to dashboard_level_path(@level), notice: 'Exam was successfully updated.'
       else
         render :edit, status: :unprocessable_entity
       end
     end
 
     def destroy
-      @level.destroy
+      questions = @level.questions
+      exam = @level.exam
 
-      redirect_to dashboard_levels_path, notice: 'Level was successfully destroyed.'
+      delete_associated_questions(questions)
+      @level.destroy
+      exam.destroy
+
+      redirect_to dashboard_exams_path, notice: 'Exam was successfully destroyed.'
     end
 
     private
@@ -60,7 +65,13 @@ module Dashboard
 
     def level_params
       params.require(:level).permit(questions_attributes: %i[id question_title first_answer second_answer third_answer
-                                                                     correct_answer _destroy])
+                                                                     correct_answer points _destroy])
+    end
+
+    def delete_associated_questions(questions)
+      questions.each do |q|
+        q.destroy
+      end
     end
   end
 end

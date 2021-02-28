@@ -1,7 +1,7 @@
-<div class="px-12">
+<div class="px-12" data-controller="exams">
   <h1 class="text-black text-2xl mb-5"><%= @exam.title %></h1>
-  <%= form_with(url: dashboard_results_path, model: @result, local: true, class: "w-full overflow-scroll") do |f| %>
-    <%= f.hidden_field :grade, id: "totalGrade" %>
+  <%= form_with(url: dashboard_results_path, model: @result, local: true, class: "w-full overflow-scroll", data: {target: "exams.examsForm", remote: true}) do |f| %>
+    <%= f.hidden_field :grade, data: {target: "exams.grade"} %>
     <%= f.hidden_field :exam_id, value: @exam.id %>
     <% @questions.each_with_index do |q, index| %>
       <div class="p-4 bg-white shadow-sm rounded-md mb-4">
@@ -10,7 +10,7 @@
           <h4 class="text-base text-black">Question <%= index + 1 %></h4>
         </div>
         <div class="flex flex-wrap">
-          <div class="w-full px-3">
+          <div class="w-full px-3 answers-list" data-points="<%= q.points %>" data-correct="<%= q.correct_answer %>">
             <div class="flex items-center mb-3">
               <%= radio_button_tag "answer #{index+1}".parameterize.underscore.to_sym, '1' %>
               <span class="ml-3"><%= q.first_answer %></span>
@@ -28,7 +28,7 @@
       </div>
     <% end %>
     <div class="actions mt-5 flex justify-end">
-      <%= f.submit "Submit Answers", class: "bg-indigo-500 text-white py-2 px-3 rounded-md cursor-pointer" %>
+      <%= f.submit "Submit Answers", class: "bg-indigo-500 text-white py-2 px-3 rounded-md cursor-pointer", data: {action: "click->exams#onSubmitResult"} %>
     </div>
   <% end %>
 </div>

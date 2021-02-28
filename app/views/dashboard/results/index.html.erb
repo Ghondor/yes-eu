@@ -23,11 +23,11 @@
           <tr class="bg-white font-medium text-sm divide-y divide-gray-200">
             <td class="p-4 whitespace-nowrap text-indigo-500 underline"><%= r.exam.title %></td>
             <td class="p-4 whitespace-nowrap">
-              <%= "#{User.find(r.exam.teacher_id).map(&:first_name)[0]} #{User.find(r.exam.teacher_id).map(&:last_name)[0]}" %>
+              <%= "#{User.find(r.exam.teacher_id).first_name} #{User.find(r.exam.teacher_id).last_name}" %>
             </td>
             <td class="p-4 whitespace-nowrap"><%= r.created_at.strftime('%d.%m.%Y') %></td>
             <td class="p-4 whitespace-nowrap"><%= r.created_at.strftime('%H:%M') %></td>
-            <td class="p-4 whitespace-nowrap"><%= r.grade %> <%= 'point'.pluralize(r.grade) %></td>
+            <td class="p-4 whitespace-nowrap"><%= r.grade %> <%= 'Point'.pluralize(r.grade) %></td>
           </tr>
         <% end %>
         </tbody>

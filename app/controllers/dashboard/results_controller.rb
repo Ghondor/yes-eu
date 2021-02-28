@@ -1,6 +1,7 @@
 module Dashboard
   class ResultsController < Dashboard::DashboardController
     def index
+      # @results = Exam.joins(:results).where(results: {student_id: current_user.i})
       @results = Result.where(student_id: current_user.id)
     end
 
@@ -13,6 +14,13 @@ module Dashboard
     def create
       @result = Result.new(result_params)
       @result.student = current_user
+      @result.taken = true
+
+      if @result.save
+        redirect_to dashboard_results_url, notice: 'Exam was successfully submitted.'
+      else
+        render :new, status: :unprocessable_entity
+      end
     end
 
     private

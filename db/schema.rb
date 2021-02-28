@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 2021_02_28_000947) do
     t.string "second_answer"
     t.string "third_answer"
     t.integer "correct_answer"
+    t.integer "points"
     t.index ["level_id"], name: "index_questions_on_level_id"
   end
 
@@ -85,6 +86,7 @@ ActiveRecord::Schema.define(version: 2021_02_28_000947) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "student_id"
     t.integer "grade"
+    t.boolean "taken", default: false
     t.bigint "exam_id", null: false
     t.index ["exam_id"], name: "index_results_on_exam_id"
     t.index ["student_id"], name: "index_results_on_student_id"

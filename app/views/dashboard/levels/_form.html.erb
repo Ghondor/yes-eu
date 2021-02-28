@@ -5,7 +5,7 @@
       <div class="nested-fields">
         <% if level.errors.any? %>
           <div id="error_explanation">
-            <h2><%= pluralize(level.errors.count, "error") %> prohibited this room from being saved:</h2>
+            <h2><%= pluralize(level.errors.count, "error") %> prohibited this exam from being saved:</h2>
 
             <ul>
               <% level.errors.full_messages.each do |message| %>
@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="actions mt-5 flex justify-end">
-      <%= f.submit "Create level", class: "bg-indigo-500 text-white py-2 px-3 rounded-md cursor-pointer" %>
+      <%= f.submit "Create Exam", class: "bg-indigo-500 text-white py-2 px-3 rounded-md cursor-pointer" %>
     </div>
   <% end %>
 </div>
