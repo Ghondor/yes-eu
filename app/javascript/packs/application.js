@@ -14,3 +14,5 @@ import '../css/application.scss'
 
 global.toastr = require("toastr");
 
+
+import "controllers"
